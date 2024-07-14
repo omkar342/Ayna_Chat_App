@@ -1,6 +1,6 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Box } from "@chakra-ui/react";
-import Register from "./Register";
-import Login from "./Login";
+import Register from "../Authentication/Register";
+import Login from "../Authentication/Login";
 import WelcomeText from "../Reusable Components/WelcomeText";
 
 function LandingPage() {
