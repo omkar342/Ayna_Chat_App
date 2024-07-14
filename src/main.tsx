@@ -8,7 +8,7 @@ import { theme } from "../chakra-theme.ts";
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import { Link, Route, Switch, Router } from "wouter";
-import Hello from "./Hello.tsx";
+import Hello from "./Components/Chat Pages/Hello.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
