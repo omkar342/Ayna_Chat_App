@@ -9,11 +9,17 @@ import {
 import { useState } from "react";
 import { api } from "../../utils/axiosInstance";
 import { toast } from "react-hot-toast";
+import { useNavigate } from 'react-router-dom';
+import { useUser, UserContextType } from "../../contexts/userContext";
 
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const { setUserAndToken } = useUser() as UserContextType;
+
+  const navigate = useNavigate();
 
   const handleRegister = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -26,13 +32,21 @@ function Register() {
         toast.error("Passwords do not match");
         return;
       }
-      const response = await api("/auth/register", "post", {
-        email: email,
+      const response = await api("/user/register", "post", {
+        userEmail: email,
         password: password,
+        confirmPassword: confirmPassword,
       });
-      if (response.status === 200) {
-        console.log("Registered Successfully", response);
+      if (response.status === 201) {
+
         toast.success("Registered Successfully");
+        setUserAndToken(response.data.userData, response.data.accessToken);
+        
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+
+        navigate('/hello-world');
       }
     } catch (e) {
       console.log("Error", e);
@@ -73,7 +87,13 @@ function Register() {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </FormControl>
-        <Button type="submit" colorScheme="pink" size="lg" width="full" onClick={handleRegister}>
+        <Button
+          type="submit"
+          colorScheme="pink"
+          size="lg"
+          width="full"
+          onClick={handleRegister}
+        >
           Register
         </Button>
       </VStack>
