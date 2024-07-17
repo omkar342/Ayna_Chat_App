@@ -62,8 +62,8 @@ export const api = async (
             toast.error("Please login first");
             localStorage.removeItem('accessToken');
             localStorage.removeItem('refreshToken');
-            if (document.location.pathname !== '/login') {
-              document.location.href = '/login';
+            if (document.location.pathname !== '/') {
+              document.location.href = '/';
             }
             return Promise.reject(new Error("Refresh token expired"));
           }
@@ -71,8 +71,8 @@ export const api = async (
           toast.error("Session expired, please login again");
           localStorage.removeItem('accessToken');
           localStorage.removeItem('refreshToken');
-          if (document.location.pathname !== '/login') {
-            document.location.href = '/login';
+          if (document.location.pathname !== '/') {
+            document.location.href = '/';
           }
           return Promise.reject(new Error("Failed to refresh token"));
         }
