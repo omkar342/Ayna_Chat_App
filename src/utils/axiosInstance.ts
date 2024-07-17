@@ -3,21 +3,21 @@ import { toast } from "react-hot-toast";
 import { baseURL } from "../utils/urls";
 
 interface ApiResponse {
-  data: any; // Ideally, you would define a more specific type or generic type here
+  data: any;
   status: number;
   success: boolean;
   message: string;
 }
 
 const Axios = axios.create({
-  baseURL: baseURL,
+  baseURL: `${baseURL}/api`
 });
 
 export const api = async (
   url: string,
-  type: Method, // Utilizing Axios' Method type which includes 'get', 'post', 'put', 'delete'
-  data?: object, // Specify more precise type if possible
-  headers?: object, // Specify more precise type if possible
+  type: Method,
+  data?: object, 
+  headers?: object,
   options: AxiosRequestConfig = {}
 ): Promise<ApiResponse> => {
   const requestTypes: Method[] = ['get', 'post', 'put', 'delete'];
@@ -41,7 +41,7 @@ export const api = async (
         success: response.data.success,
         message: response.data.message
       };
-    } catch (e: any) { // This still uses 'any'; consider using AxiosError for more specific error handling
+    } catch (e: any) { 
       if (e?.response?.status === 404 || e?.response?.status === 403) {
         console.log("Error with status:", e.response.status);
       }

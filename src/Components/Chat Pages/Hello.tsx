@@ -1,24 +1,21 @@
-import { useEffect } from 'react'
-import { useUser, UserContextType } from '../../contexts/userContext'; 
-import { useCheckToken } from '../../utils/authenticateUser';
+import { useEffect } from "react";
+import { useUser, UserContextType } from "../../contexts/userContext";
+import { useCheckToken } from "../../utils/authenticateUser";
 
 function Hello() {
+  const { userData, setUserAndToken } = useUser() as UserContextType;
 
-    const { userData, setUserAndToken } = useUser() as UserContextType;
+  const checkToken = useCheckToken();
 
-    const checkToken = useCheckToken();
+  useEffect(() => {
+    if (!userData) {
+      setTimeout(() => {
+        checkToken(setUserAndToken);
+      }, 1000);
+    }
+  }, []);
 
-    useEffect(() => {
-        if (!userData) {
-            setTimeout(() => {
-              checkToken(setUserAndToken);
-            }, 1000);
-        }
-    },[]);
-
-  return (
-    <div>Hello</div>
-  )
+  return <div>Hello</div>;
 }
 
-export default Hello
+export default Hello;
