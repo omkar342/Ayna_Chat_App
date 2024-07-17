@@ -53,7 +53,7 @@ function Register() {
         setPassword("");
         setConfirmPassword("");
 
-        navigate("/hello");
+        navigate("/chat");
       }
       else {
         toast.error(response.data.message);
