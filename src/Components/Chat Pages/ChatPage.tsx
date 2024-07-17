@@ -31,7 +31,6 @@ const ChatPage: React.FC = () => {
   const [latestMessage, setLatestMessage] = useState<{
     message?: string | undefined;
     senderType?: string | undefined;
-    // room: string;
   }>({});
   const [chats, setChats] = useState<Chat[]>([]);
   const [selectedChat, setSelectedChat] = useState<Chat | undefined>(undefined);
@@ -40,16 +39,6 @@ const ChatPage: React.FC = () => {
   const checkToken = useCheckToken();
 
   const navigate = useNavigate();
-
-  // console.log("User Data:", userData);
-
-  // console.log("Chats:", selectedChat);
-
-  // console.log("UserInfo", userInfo);
-
-  console.log("Messages", messages);
-
-  console.log("joinedRoom", joinedRoom);
 
   useEffect(() => {
     if (!userData) {
@@ -68,24 +57,7 @@ const ChatPage: React.FC = () => {
       try {
         setLatestMessage({ message: newMessage, senderType: "socket" });
 
-        console.log("new message:", newMessage);
-
-        console.log("User Data:", userData);
-
-        console.log("Chats:", selectedChat);
-
-        console.log("UserInfo", userInfo);
-
-        console.log("Messages", messages);
-
-        console.log("message", message);
-
-        console.log("joinedRoom", joinedRoom);
-
         if (!userData || !selectedChat || selectedChat._id !== joinedRoom) {
-          console.log("User Data missing", userData);
-          console.log("Chats missing", selectedChat);
-          console.log("joinedRoom missing", joinedRoom);
           return;
         }
 
@@ -95,14 +67,6 @@ const ChatPage: React.FC = () => {
           associatedChat: selectedChat?._id,
           senderType: "socket",
         });
-
-        console.log("not missing response", response);
-
-        // console.log("Response 11", response);
-
-        // setMessages(response.data.chat.messages);
-
-        // console.log("Response 11", response);
 
         // if (response.status === 200) {
         //   // setSelectedChat(response.data.chat);
@@ -141,8 +105,6 @@ const ChatPage: React.FC = () => {
         chatCreator: userData?._id,
         chatName,
       });
-
-      console.log("Response 134", response);
 
       if (response.status === 201) {
         toast.success("Chat saved successfully");
@@ -183,7 +145,6 @@ const ChatPage: React.FC = () => {
       setMessage("");
     } catch (e) {
       console.log(e);
-      console.log("Message not saved");
       toast.error("Failed to send message");
     }
   };
