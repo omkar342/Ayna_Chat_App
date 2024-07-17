@@ -116,7 +116,7 @@ const ChatPage: React.FC = () => {
       }
     };
 
-    const cleanup = onMessageReceived(handleReceiveMessage);
+    onMessageReceived(handleReceiveMessage);
     // return () => {
     //   console.log("Cleaning up");
     //   cleanup;
