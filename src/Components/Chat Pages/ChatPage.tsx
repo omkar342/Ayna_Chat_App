@@ -61,7 +61,9 @@ const ChatPage: React.FC = () => {
           return;
         }
 
-        const response = await api("/chat/save-message", "post", {
+        console.log("UserInfo", userInfo);
+
+        await api("/chat/save-message", "post", {
           message: newMessage,
           sender: userData?._id,
           associatedChat: selectedChat?._id,
